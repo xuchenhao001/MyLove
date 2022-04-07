@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Our Love Story</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+        @font-face {
+            font-family: digit;
+            src: url('fonts/digital-7_mono.ttf') format("truetype");
+        }
+    </style>
+    <link href="css/default_dev.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/garden.js"></script>
+    <script type="text/javascript" src="js/functions_dev.js"></script>
+</head>
+
+<body>
+<div id="mainDiv">
+    <div id="content">
+        <div id="code">
+            <span class="comments">/**</span><br/>
+            <span class="space"></span><span class="comments">* We met each other at Deakin University,</span><br/>
+            <span class="space"></span><span class="comments">* where our dreams start.</span><br/>
+            <span class="comments">*/</span><br/>
+            Boy i = <span class="keyword">new</span> Boy(<span class="string">"Chenhao Xu"</span>);<br/>
+            Girl u = <span class="keyword">new</span> Girl(<span class="string">"Chuying Wen"</span>);<br/>
+            <span class="comments">// We knew each other in Oct 2019. </span><br/>
+            i.knew(u);<br/>
+            u.knew(i);<br/>
+            <span class="comments">// We became best friends.</span><br/>
+            i.beTheBestFriendOf(u);<br/>
+            <span class="comments">// You went back to China in Dec 2019.</span><br/>
+            i.drive(u).toTheAirport();<br/>
+            u.travelTo("China");<br/>
+            <span class="comments">// Even geographical distance did not cool our feelings.</span><br/>
+            i.onlineChatWith(u);<br/>
+            u.onlineChatWith(i);<br/>
+            <span class="comments">// You came back to Melbourne on 6 Mar 2022.</span><br/>
+            u.travelTo("Melbourne");<br/>
+            i.pickUp(u).fromTheAirport();<br/>
+            <span class="comments">// We fell in love on 22 Mar 2022.</span><br/>
+            i.fellInLoveWith(u);<br/>
+            u.fellInLoveWith(i);<br/>
+            <span class="comments">// Since then, we enjoy life every day.</span><br/>
+            i.enjoy();<br/>
+            u.enjoy();<br/>
+            <span class="comments">// Since life always twists and turns,</span><br/>
+            <span class="comments">// I'll always be with you.</span><br/>
+            i.beWith(u);<br/>
+        </div>
+        <div id="loveHeart">
+            <canvas id="garden"></canvas>
+            <div id="words">
+                <div id="messages">
+                    We have been in love for
+                    <div id="elapseClock"></div>
+                </div>
+      <!--           <div id="loveu">
+                    Love you forever and ever.<br/>
+                    <div class="signature">- Chenhao Xu</div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div id="copyright">
+        Inspired by <a href="http://www.openrise.com/lab/FlowerPower/">FlowerPower</a> project.<br/>
+        Copyright © 2022 Chenhao Xu
+    </div>
+</div>
+<script type="text/javascript">
+    var loveHeart = $("#loveHeart");
+    var offsetX = loveHeart.width() / 2;
+    var offsetY = loveHeart.height() / 2 - 55;
+    var together = new Date();
+    together.setFullYear(2022, 3, 22);
+    together.setHours(0);
+    together.setMinutes(0);
+    together.setSeconds(0);
+    together.setMilliseconds(0);
+
+    if (!document.createElement('canvas').getContext) {
+        var msg = document.createElement("div");
+        msg.id = "errorMsg";
+        msg.innerHTML = "Your browser doesn't support HTML5!<br/>Recommend use Chrome 14+/IE 9+/Firefox 7+/Safari 4+";
+        document.body.appendChild(msg);
+        $("#code").css("display", "none");
+        var copyright = $("#copyright");
+        copyright.css("position", "absolute");
+        copyright.css("bottom", "10px");
+        document.execCommand("stop");
+    } else {
+        setTimeout(function () {
+            adjustWordsPosition();
+            startHeartAnimation(offsetX, offsetY);
+        }, 1000);
+
+        timeElapse(together, 1);
+        setInterval(function () {
+            timeElapse(together, 1);
+        }, 500);
+
+        adjustCodePosition();
+        $("#code").typewriter();
+    }
+</script>
+</body>
+</html>
