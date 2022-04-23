@@ -125,7 +125,7 @@ function timeElapse(date, mode) {
             days += getDaysInMonth(current.getMonth());
             current.setDate(current.getDate() - 1);
         }
-        months = current.getMonth() - date.getMonth();
+        months = current.getMonth() + 1 - date.getMonth();
         if (months < 0){
             months += 12;
             current.setYear(current.getFullYear() - 1);
@@ -148,6 +148,7 @@ function timeElapse(date, mode) {
 
     result = (years > 0 ? "<span class=\"digit\">" + years + "</span> year ":"");
     result += (months > 0 ? "<span class=\"digit\">" + months + "</span> month ":"");
+    // result += "<span class=\"digit\">" + months + "</span> months ";
     result += "<span class=\"digit\">" + days + "</span> day ";
     result += "<span class=\"digit\">" + hours + "</span> hour ";
     result += "<span class=\"digit\">" + minutes + "</span> min ";
