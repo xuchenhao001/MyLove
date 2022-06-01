@@ -124,8 +124,7 @@ function timeElapse(date, mode) {
         minusMonthFlag = false;
         if (days < 0) {
             minusMonthFlag = true;
-            days += getDaysInMonth(current.getMonth());
-            current.setDate(current.getDate() - 1);
+            days += getDaysInMonth(current.getMonth()-1);
         }
         months = current.getMonth() + 1 - date.getMonth();
         if (minusMonthFlag === true) {
