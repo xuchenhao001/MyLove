@@ -163,7 +163,7 @@ function timeElapse(date, mode) {
 
 function showMessages() {
     adjustWordsPosition();
-    $('#messages').fadeIn(5000, function () {
+    $('#messages').fadeIn(1000, function () {
         showLoveU();
     });
 }
