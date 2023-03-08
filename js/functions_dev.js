@@ -34,19 +34,21 @@ $(window).resize(function () {
     }
 });
 
-function getHeartPoint(offsetX, offsetY, angle) {
+function getHeartPoint(offsetX, offsetY, angle, heartWidth) {
+    scale = heartWidth / 35
     var t = angle / Math.PI;
-    var x = 19.5 * (16 * Math.pow(Math.sin(t), 3));
-    var y = -20 * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+    var x = scale * (16 * Math.pow(Math.sin(t), 3));
+    var y = - scale * 40 / 39 * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
     return [offsetX + x, offsetY + y];
 }
 
-function startHeartAnimation(offsetX, offsetY) {
-    var interval = 50;
+function startHeartAnimation(offsetX, offsetY, heartWidth) {
+    // classic interval: 50
+    var interval = 1;
     var angle = 10;
     var heart = [];
     var animationTimer = setInterval(function () {
-        var bloom = getHeartPoint(offsetX, offsetY, angle);
+        var bloom = getHeartPoint(offsetX, offsetY, angle, heartWidth);
         var draw = true;
         for (var i = 0; i < heart.length; i++) {
             var p = heart[i];
@@ -62,7 +64,7 @@ function startHeartAnimation(offsetX, offsetY) {
         }
         if (angle >= 30) {
             clearInterval(animationTimer);
-            showMessages();
+            showMessages(offsetX, offsetY, heartWidth);
         } else {
             angle += 0.2;
         }
@@ -85,8 +87,8 @@ function startHeartAnimation(offsetX, offsetY) {
                 if (progress >= str.length) {
                     clearInterval(timer);
                 }
-            }, 75);
-            // classic setting: 75ms
+            }, 1);
+            // classic interval: 75ms
         });
         return this;
     };
@@ -154,27 +156,30 @@ function timeElapse(date, mode) {
     result = (years > 0 ? "<span class=\"digit\">" + years + "</span> year ":"");
     result += (months > 0 ? "<span class=\"digit\">" + months + "</span> month ":"");
     // result += "<span class=\"digit\">" + months + "</span> months ";
-    result += "<span class=\"digit\">" + days + "</span> day ";
-    result += "<span class=\"digit\">" + hours + "</span> hour ";
-    result += "<span class=\"digit\">" + minutes + "</span> min ";
-    result += "<span class=\"digit\">" + seconds + "</span> sec";
+    result += "<span class=\"digit\"><b>" + days + "</b></span> day ";
+    result += "<span class=\"digit\"><b>" + hours + "</b></span> hour ";
+    result += "<span class=\"digit\"><b>" + minutes + "</b></span> min ";
+    result += "<span class=\"digit\"><b>" + seconds + "</b></span> sec";
 
     $("#elapseClock").html(result);
 }
 
-function showMessages() {
-    adjustWordsPosition();
+function showMessages(offsetX, offsetY, heartWidth) {
+    adjustWordsPosition(offsetX, offsetY, heartWidth);
     $('#messages').fadeIn(1000, function () {
         showLoveU();
     });
+    $('#elapseClock').fadeIn(1000)
 }
 
-function adjustWordsPosition() {
+function adjustWordsPosition(offsetX, offsetY, heartWidth) {
+    console.log("offsetX: "+ offsetX)
+    console.log("offsetY: "+ offsetY)
     var $words = $('#words');
-    var $garden = $('#garden');
     $words.css("position", "absolute");
-    $words.css("top", $garden.position().top + 195);
-    $words.css("left", $garden.position().left + 70);
+    // $words.css("left", offsetX - heartWidth / 2);
+    $words.css("top", offsetY - heartWidth / 20);
+    $words.css("width", heartWidth);
 }
 
 function showLoveU() {

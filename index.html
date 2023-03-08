@@ -29,15 +29,18 @@
         <div class="col">
             <div id="loveHeart">
                 <canvas id="garden"></canvas>
-                <div id="words">
-                    <div id="messages">
-                        We have been in love for
-                        <div id="elapseClock"></div>
+                <div class="container" id="words">
+                    <!-- <div class="row d-grid gap-2"><div class="btn btn-primary">Button Here</div></div> -->
+                    <div class="row" id="messages">
+                        <div class="col-10 offset-1 h2">We have been in love for</div>
                     </div>
-                    <div id="loveu">
-                        <!-- <a href="pdf/WillYouMarryMe.pdf" style="all: unset"><div id="loveu">Will you marry me? <br/></a> -->
-                        <a class="btn btn-outline-dark border-0" href="pdf/WillYouMarryMe.pdf" style="font-size:30px; color: #666;" aria-disabled="true"> Will you marry me? </a>
-                        <!-- <div class="signature">- Chenhao Xu</div> -->
+                    <div class="row">
+                        <div class="col-10 offset-1 text-center h3" id="elapseClock"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                        <a id="loveu" class="btn btn-outline-dark border-0" href="pdf/WillYouMarryMe.pdf" aria-disabled="true"> <span class="h2"> Will you marry me? </span></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,7 +89,7 @@
 <script type="text/javascript">
     var loveHeart = $("#loveHeart");
     var offsetX = loveHeart.width() / 2;
-    var offsetY = loveHeart.height() / 2 - 55;
+    var offsetY = loveHeart.height() / 2 - 0.09 * loveHeart.height();
     var together = new Date();
     together.setFullYear(2022, 3, 22); // month range: 1~12
     together.setHours(0);
@@ -102,9 +105,10 @@
         $("#code").css("display", "none");
         document.execCommand("stop");
     } else {
+        // adjustWordsPosition();
         setTimeout(function () {
-            adjustWordsPosition();
-            startHeartAnimation(offsetX, offsetY);
+            // adjustWordsPosition();
+            startHeartAnimation(offsetX, offsetY, loveHeart.width());
         }, 1000);
 
         timeElapse(together, 1);
