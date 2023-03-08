@@ -34,43 +34,47 @@
                         We have been in love for
                         <div id="elapseClock"></div>
                     </div>
-                    <a href="pdf/WillYouMarryMe.pdf" style="all: unset"><div id="loveu">Will you marry me? <br/></a>
-                    <!-- <div class="signature">- Chenhao Xu</div> -->
+                    <div id="loveu">
+                        <!-- <a href="pdf/WillYouMarryMe.pdf" style="all: unset"><div id="loveu">Will you marry me? <br/></a> -->
+                        <a class="btn btn-outline-dark border-0" href="pdf/WillYouMarryMe.pdf" style="font-size:30px; color: #666;" aria-disabled="true"> Will you marry me? </a>
+                        <!-- <div class="signature">- Chenhao Xu</div> -->
                     </div>
                 </div>
             </div>
         </div>
         <div class="col">
-            <div id="code">
-                <span class="comments">/**</span><br/>
-                <span class="space"></span><span class="comments">* We met each other at Deakin University,</span><br/>
-                <span class="space"></span><span class="comments">* where our dreams start.</span><br/>
-                <span class="comments">*/</span><br/>
-                Boy i = <span class="keyword">new</span> Boy(<span class="string">"Chenhao Xu"</span>);<br/>
-                Girl u = <span class="keyword">new</span> Girl(<span class="string">"Chuying Wen"</span>);<br/>
-                <span class="comments">// We knew each other in Oct 2019. </span><br/>
-                i.knew(u);<br/>
-                u.knew(i);<br/>
-                <span class="comments">// We became best friends.</span><br/>
-                i.beTheBestFriendOf(u);<br/>
-                <span class="comments">// You went back to Beijing in Dec 2019.</span><br/>
-                i.drive(u).toTheAirport();<br/>
-                u.travelTo("Beijing");<br/>
-                <span class="comments">// Even geographical distance did not cool our feelings.</span><br/>
-                i.onlineChatWith(u);<br/>
-                u.onlineChatWith(i);<br/>
-                <span class="comments">// You came back to Melbourne on 6 Mar 2022.</span><br/>
-                u.travelTo("Melbourne");<br/>
-                i.pickUp(u).fromTheAirport();<br/>
-                <span class="comments">// We fell in love on 22 Mar 2022.</span><br/>
-                i.fellInLoveWith(u);<br/>
-                u.fellInLoveWith(i);<br/>
-                <span class="comments">// Since then, we enjoy life every day.</span><br/>
-                i.enjoy();<br/>
-                u.enjoy();<br/>
-                <span class="comments">// Since life always twists and turns,</span><br/>
-                <span class="comments">// I'll always be with you.</span><br/>
-                i.beWith(u);<br/>
+            <div class="container py-5">
+                <div id="code">
+                    <span class="comments">/**</span><br/>
+                    <span class="space"></span><span class="comments">* We met each other at Deakin University,</span><br/>
+                    <span class="space"></span><span class="comments">* where our dreams start.</span><br/>
+                    <span class="comments">*/</span><br/>
+                    Boy i = <span class="keyword">new</span> Boy(<span class="string">"Chenhao Xu"</span>);<br/>
+                    Girl u = <span class="keyword">new</span> Girl(<span class="string">"Chuying Wen"</span>);<br/>
+                    <span class="comments">// We knew each other in Oct 2019. </span><br/>
+                    i.knew(u);<br/>
+                    u.knew(i);<br/>
+                    <span class="comments">// We became best friends.</span><br/>
+                    i.beTheBestFriendOf(u);<br/>
+                    <span class="comments">// You went back to Beijing in Dec 2019.</span><br/>
+                    i.drive(u).toTheAirport();<br/>
+                    u.travelTo("Beijing");<br/>
+                    <span class="comments">// Even geographical distance did not cool our feelings.</span><br/>
+                    i.onlineChatWith(u);<br/>
+                    u.onlineChatWith(i);<br/>
+                    <span class="comments">// You came back to Melbourne on 6 Mar 2022.</span><br/>
+                    u.travelTo("Melbourne");<br/>
+                    i.pickUp(u).fromTheAirport();<br/>
+                    <span class="comments">// We fell in love on 22 Mar 2022.</span><br/>
+                    i.fellInLoveWith(u);<br/>
+                    u.fellInLoveWith(i);<br/>
+                    <span class="comments">// Since then, we enjoy life every day.</span><br/>
+                    i.enjoy();<br/>
+                    u.enjoy();<br/>
+                    <span class="comments">// Since life always twists and turns,</span><br/>
+                    <span class="comments">// I'll always be with you.</span><br/>
+                    i.beWith(u);<br/>
+                </div>
             </div>
         </div>
     </div>
@@ -108,7 +112,6 @@
             timeElapse(together, 1);
         }, 500);
 
-        adjustCodePosition();
         $("#code").typewriter();
     }
 </script>

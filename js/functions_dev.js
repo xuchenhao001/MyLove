@@ -86,6 +86,7 @@ function startHeartAnimation(offsetX, offsetY) {
                     clearInterval(timer);
                 }
             }, 75);
+            // classic setting: 75ms
         });
         return this;
     };
@@ -174,11 +175,6 @@ function adjustWordsPosition() {
     $words.css("position", "absolute");
     $words.css("top", $garden.position().top + 195);
     $words.css("left", $garden.position().left + 70);
-}
-
-function adjustCodePosition() {
-    var $code = $('#code');
-    $code.css("margin-top", ($("#garden").height() - $code.height()) / 2);
 }
 
 function showLoveU() {
