@@ -44,7 +44,7 @@ function getHeartPoint(offsetX, offsetY, angle, heartWidth) {
 
 function startHeartAnimation(offsetX, offsetY, heartWidth) {
     // classic interval: 50
-    var interval = 1;
+    var interval = 50;
     var angle = 10;
     var heart = [];
     var animationTimer = setInterval(function () {
@@ -87,81 +87,22 @@ function startHeartAnimation(offsetX, offsetY, heartWidth) {
                 if (progress >= str.length) {
                     clearInterval(timer);
                 }
-            }, 1);
+            }, 75);
             // classic interval: 75ms
         });
         return this;
     };
 })(jQuery);
 
-function getDaysInMonth(month) {
-    var data = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    return data[month];
-}
+function timeElapse(dateDiff) {
+    timeToShow = (dateDiff.years > 0 ? "<span class=\"digit\">" + dateDiff.years + "</span> year ":"");
+    timeToShow += (dateDiff.months > 0 ? "<span class=\"digit\">" + dateDiff.months + "</span> month ":"");
+    timeToShow += "<span class=\"digit\"><b>" + dateDiff.days + "</b></span> day ";
+    timeToShow += "<span class=\"digit\"><b>" + dateDiff.hours + "</b></span> hour ";
+    timeToShow += "<span class=\"digit\"><b>" + dateDiff.minutes + "</b></span> min ";
+    timeToShow += "<span class=\"digit\"><b>" + dateDiff.seconds + "</b></span> sec";
 
-function timeElapse(date, mode) {
-    var current = new Date();
-    var years = NaN;
-    var months = NaN;
-    var days = NaN;
-    var hours;
-    var minutes;
-    var result;
-    var seconds = current.getSeconds() - date.getSeconds();
-    if (seconds < 0) {
-        seconds += 60;
-        current.setMinutes(current.getMinutes() - 1);
-    }
-    minutes = current.getMinutes() - date.getMinutes();
-    if (minutes < 0) {
-        minutes += 60;
-        current.setHours(current.getHours() - 1);
-    }
-    hours = current.getHours() - date.getHours();
-    if (hours < 0) {
-        hours += 24;
-        current.setDate(current.getDate() - 1);
-    }
-    if (mode === 1) {
-        days = current.getDate() - date.getDate();
-        minusMonthFlag = false;
-        if (days < 0) {
-            minusMonthFlag = true;
-            days += getDaysInMonth(current.getMonth()-1);
-        }
-        months = current.getMonth() + 1 - date.getMonth();
-        if (minusMonthFlag === true) {
-            months -= 1;
-        }
-        if (months < 0){
-            months += 12;
-            current.setYear(current.getFullYear() - 1);
-        }
-        years = current.getFullYear() - date.getFullYear();
-    }
-    else{
-        days = Math.floor((current.getTime() - date.getTime()) / (1000 * 3600 * 24));
-    }
-
-    if (hours < 10) {
-        hours = "0" + hours;
-    }
-    if (minutes < 10) {
-        minutes = "0" + minutes;
-    }
-    if (seconds < 10) {
-        seconds = "0" + seconds;
-    }
-
-    result = (years > 0 ? "<span class=\"digit\">" + years + "</span> year ":"");
-    result += (months > 0 ? "<span class=\"digit\">" + months + "</span> month ":"");
-    // result += "<span class=\"digit\">" + months + "</span> months ";
-    result += "<span class=\"digit\"><b>" + days + "</b></span> day ";
-    result += "<span class=\"digit\"><b>" + hours + "</b></span> hour ";
-    result += "<span class=\"digit\"><b>" + minutes + "</b></span> min ";
-    result += "<span class=\"digit\"><b>" + seconds + "</b></span> sec";
-
-    $("#elapseClock").html(result);
+    $("#elapseClock").html(timeToShow);
 }
 
 function showMessages(offsetX, offsetY, heartWidth) {
@@ -173,8 +114,6 @@ function showMessages(offsetX, offsetY, heartWidth) {
 }
 
 function adjustWordsPosition(offsetX, offsetY, heartWidth) {
-    console.log("offsetX: "+ offsetX)
-    console.log("offsetY: "+ offsetY)
     var $words = $('#words');
     $words.css("position", "absolute");
     // $words.css("left", offsetX - heartWidth / 2);
