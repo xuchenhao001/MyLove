@@ -95,8 +95,8 @@ function startHeartAnimation(offsetX, offsetY, heartWidth) {
 })(jQuery);
 
 function timeElapse(dateDiff) {
-    timeToShow = (dateDiff.years > 0 ? "<span class=\"digit\">" + dateDiff.years + "</span> year ":"");
-    timeToShow += (dateDiff.months > 0 ? "<span class=\"digit\">" + dateDiff.months + "</span> month ":"");
+    timeToShow = (dateDiff.years > 0 ? "<span class=\"digit\"><b>" + dateDiff.years + "</b></span> year ":"");
+    timeToShow += (dateDiff.months > 0 ? "<span class=\"digit\"><b>" + dateDiff.months + "</b></span> month ":"");
     timeToShow += "<span class=\"digit\"><b>" + dateDiff.days + "</b></span> day ";
     timeToShow += "<span class=\"digit\"><b>" + dateDiff.hours + "</b></span> hour ";
     timeToShow += "<span class=\"digit\"><b>" + dateDiff.minutes + "</b></span> min ";
