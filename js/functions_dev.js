@@ -43,8 +43,8 @@ function getHeartPoint(offsetX, offsetY, angle, heartWidth) {
 }
 
 function startHeartAnimation(offsetX, offsetY, heartWidth) {
-    // classic interval: 50
-    var interval = 50;
+    // classic interval: 25
+    var interval = 25;
     var angle = 10;
     var heart = [];
     var animationTimer = setInterval(function () {
@@ -71,29 +71,6 @@ function startHeartAnimation(offsetX, offsetY, heartWidth) {
     }, interval);
 }
 
-(function ($) {
-    $.fn.typewriter = function () {
-        this.each(function () {
-            var $ele = $(this), str = $ele.html(), progress = 0;
-            $ele.html('');
-            var timer = setInterval(function () {
-                var current = str.substr(progress, 1);
-                if (current === '<') {
-                    progress = str.indexOf('>', progress) + 1;
-                } else {
-                    progress++;
-                }
-                $ele.html(str.substring(0, progress) + ((progress & 1)===1 ? '_' : ''));
-                if (progress >= str.length) {
-                    clearInterval(timer);
-                }
-            }, 75);
-            // classic interval: 75ms
-        });
-        return this;
-    };
-})(jQuery);
-
 function timeElapse(dateDiff) {
     timeToShow = ""
     if (dateDiff.years > 0) {
@@ -113,20 +90,18 @@ function timeElapse(dateDiff) {
 
 function showMessages(offsetX, offsetY, heartWidth) {
     adjustWordsPosition(offsetX, offsetY, heartWidth);
-    $('#messages').fadeIn(1000, function () {
-        showLoveU();
-    });
-    $('#elapseClock').fadeIn(1000)
+    $('#messages').fadeIn(1000);
+    $('#elapseClock').fadeIn(1000);
+    $('#willYouMarryMe').fadeIn(0);
+    $('#willYouMarryMe').delay(1000).fadeTo(3000, 1);
+    $('#loveLetter').fadeIn(1000);
 }
 
 function adjustWordsPosition(offsetX, offsetY, heartWidth) {
     var $words = $('#words');
-    $words.css("position", "absolute");
-    // $words.css("left", offsetX - heartWidth / 2);
-    $words.css("top", offsetY - heartWidth / 20);
     $words.css("width", heartWidth);
+    $words.css("position", "absolute");
+    $words.css("top", "50%");
+    $words.css("transform", "translateY(-60%)");
 }
 
-function showLoveU() {
-    $('#loveu').fadeIn(3000);
-}
