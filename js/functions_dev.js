@@ -94,7 +94,7 @@ function adjustWordsPosition(offsetX, offsetY, heartWidth) {
     var $words = $('#words');
     $words.css("width", heartWidth);
     $words.css("position", "absolute");
-    $words.css("top", "50%");
-    $words.css("transform", "translateY(-50%)");
+    $words.css("top", "38%");
+    // $words.css("transform", "translateY(-50%)");
 }
 
