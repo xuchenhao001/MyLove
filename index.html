@@ -29,8 +29,8 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <div class="container min-vh-100 d-flex justify-content-center">
-            <div id="loveHeart">
+            <div class="container min-vh-100 d-flex align-items-center">
+            <div class="container" id="loveHeart">
                 <canvas id="garden"></canvas>
                 <div class="container" id="words">
                     <div class="row">
@@ -75,7 +75,7 @@
 <script type="text/javascript">
     var loveHeart = $("#loveHeart");
     var offsetX = loveHeart.width() / 2;
-    var offsetY = loveHeart.height() / 2 - 0.01 * loveHeart.height();
+    var offsetY = loveHeart.height() / 2;
     var startDate = new Date();
     startDate.setFullYear(2022, 2, 22); // month range: 0~11
     startDate.setHours(0);
