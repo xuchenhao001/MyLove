@@ -39,7 +39,10 @@
                             <div class="col-10 offset-1 h2" id="messages">We have been in love for</div>
                         </div>
                         <div class="row">
-                            <div class="col text-center h3" id="elapseClock"></div>
+                            <div class="col text-center h3 elapseClock" id="elapseClockDate"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center h3 elapseClock" id="elapseClockTime"></div>
                         </div>
                         <div class="row">
                             <div class="col-12 text-center" id="willYouMarryMe">
@@ -100,7 +103,8 @@
         setInterval(function () {
             var currentDate = new Date();
             var dateDiff = moment.preciseDiff(startDate, currentDate, true);
-            timeElapse(dateDiff);
+            timeElapseDate(dateDiff);
+            timeElapseTime(dateDiff);
         }, 500);
     }
 </script>

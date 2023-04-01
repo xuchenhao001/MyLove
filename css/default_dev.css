@@ -12,9 +12,13 @@ body {
 	height: 100%;
 }
 
-#elapseClock {
+.elapseClock {
 	font-family: "sans-serif";
 	display: none;
+}
+
+.elapseClock .digit{
+    font-family: "Digital";
 }
 
 #messages{
@@ -22,9 +26,6 @@ body {
 	display: none;
 }
 
-#elapseClock .digit{
-    font-family: "Digital";
-}
 
 #willYouMarryMe{
     font-family: "GreatVibesRegular";

@@ -64,26 +64,33 @@ function startHeartAnimation(offsetX, offsetY, heartWidth) {
     }, interval);
 }
 
-function timeElapse(dateDiff) {
+function timeElapseDate(dateDiff) {
     timeToShow = ""
     if (dateDiff.years > 0) {
-        timeToShow += "<span class=\"digit\"><b>" + dateDiff.years + "</b></span> year "
-        timeToShow += "<span class=\"digit\"><b>" + dateDiff.months + "</b></span> month "
+        timeToShow += "<span class=\"digit\"><b>" + String(dateDiff.years).padStart(2, '0') + "</b></span> years "
+        timeToShow += "<span class=\"digit\"><b>" + String(dateDiff.months).padStart(2, '0') + "</b></span> months "
     }
     else if (dateDiff.months > 0) {
-        timeToShow += "<span class=\"digit\"><b>" + dateDiff.months + "</b></span> month "
+        timeToShow += "<span class=\"digit\"><b>" + String(dateDiff.months).padStart(2, '0') + "</b></span> months "
     }
-    timeToShow += "<span class=\"digit\"><b>" + dateDiff.days + "</b></span> day ";
-    timeToShow += "<span class=\"digit\"><b>" + dateDiff.hours + "</b></span> hour ";
-    timeToShow += "<span class=\"digit\"><b>" + dateDiff.minutes + "</b></span> min ";
-    timeToShow += "<span class=\"digit\"><b>" + dateDiff.seconds + "</b></span> sec";
+    timeToShow += "<span class=\"digit\"><b>" + String(dateDiff.days).padStart(2, '0') + "</b></span> days";
 
-    $("#elapseClock").html(timeToShow);
+    $("#elapseClockDate").html(timeToShow);
+}
+
+function timeElapseTime(dateDiff) {
+    timeToShow = ""
+    timeToShow += "<span class=\"digit\"><b>" + String(dateDiff.hours).padStart(2, '0') + "</b></span> hr ";
+    timeToShow += "<span class=\"digit\"><b>" + String(dateDiff.minutes).padStart(2, '0') + "</b></span> min ";
+    timeToShow += "<span class=\"digit\"><b>" + String(dateDiff.seconds).padStart(2, '0') + "</b></span> sec";
+
+    $("#elapseClockTime").html(timeToShow);
 }
 
 function showMessages(offsetX, offsetY, heartWidth) {
     $('#messages').fadeIn(1000);
-    $('#elapseClock').fadeIn(1000);
+    $('#elapseClockDate').fadeIn(1000);
+    $('#elapseClockTime').fadeIn(1000);
     $('#willYouMarryMe').fadeIn(0);
     $('#willYouMarryMe').delay(1000).fadeTo(3000, 1);
     $('#loveLetter').fadeIn(1000);
