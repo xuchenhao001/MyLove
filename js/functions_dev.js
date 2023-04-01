@@ -82,7 +82,6 @@ function timeElapse(dateDiff) {
 }
 
 function showMessages(offsetX, offsetY, heartWidth) {
-    adjustWordsPosition(offsetX, offsetY, heartWidth);
     $('#messages').fadeIn(1000);
     $('#elapseClock').fadeIn(1000);
     $('#willYouMarryMe').fadeIn(0);
@@ -94,8 +93,9 @@ function adjustWordsPosition(offsetX, offsetY, heartWidth) {
     var $words = $('#words');
     $words.css("width", heartWidth);
     $words.css("position", "absolute");
-    $words.css("top", "35%");
-    // $words.css("transform", "translateY(-50%)");
+    // $words.css("top", "35%");
+    $words.css("top", "50%");
+    $words.css("transform", "translateY(-100%)");
     // $words.addClass("pt5");
     // $words.css("top", "8rem");
 }
