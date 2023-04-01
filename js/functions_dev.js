@@ -13,13 +13,6 @@ $(function () {
     gardenCtx.globalCompositeOperation = "lighter";
     garden = new Garden(gardenCtx, gardenCanvas);
 
-    var $content = $("#content");
-    var $code = $("#code");
-    $content.css("width", $loveHeart.width() + $code.width());
-    $content.css("height", Math.max($loveHeart.height(), $code.height()));
-    $content.css("margin-top", Math.max(($window.height() - $content.height()) / 2, 10));
-    $content.css("margin-left", Math.max(($window.width() - $content.width()) / 2, 10));
-
     // renderLoop
     setInterval(function () {
         garden.render();
@@ -102,6 +95,6 @@ function adjustWordsPosition(offsetX, offsetY, heartWidth) {
     $words.css("width", heartWidth);
     $words.css("position", "absolute");
     $words.css("top", "50%");
-    $words.css("transform", "translateY(-80%)");
+    $words.css("transform", "translateY(-50%)");
 }
 
