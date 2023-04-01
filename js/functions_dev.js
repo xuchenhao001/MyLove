@@ -102,6 +102,6 @@ function adjustWordsPosition(offsetX, offsetY, heartWidth) {
     $words.css("width", heartWidth);
     $words.css("position", "absolute");
     $words.css("top", "50%");
-    $words.css("transform", "translateY(-60%)");
+    $words.css("transform", "translateY(-80%)");
 }
 
