@@ -67,13 +67,13 @@ function startHeartAnimation(offsetX, offsetY, heartWidth) {
 function timeElapseDate(dateDiff) {
     timeToShow = ""
     if (dateDiff.years > 0) {
-        timeToShow += "<span class=\"digit\"><b>" + String(dateDiff.years).padStart(2, '0') + "</b></span> years "
-        timeToShow += "<span class=\"digit\"><b>" + String(dateDiff.months).padStart(2, '0') + "</b></span> months "
+        timeToShow += "<span class=\"digit\"><b>" + String(dateDiff.years).padStart(2, '0') + "</b></span> year "
+        timeToShow += "<span class=\"digit\"><b>" + String(dateDiff.months).padStart(2, '0') + "</b></span> month "
     }
     else if (dateDiff.months > 0) {
-        timeToShow += "<span class=\"digit\"><b>" + String(dateDiff.months).padStart(2, '0') + "</b></span> months "
+        timeToShow += "<span class=\"digit\"><b>" + String(dateDiff.months).padStart(2, '0') + "</b></span> month "
     }
-    timeToShow += "<span class=\"digit\"><b>" + String(dateDiff.days).padStart(2, '0') + "</b></span> days";
+    timeToShow += "<span class=\"digit\"><b>" + String(dateDiff.days).padStart(2, '0') + "</b></span> day";
 
     $("#elapseClockDate").html(timeToShow);
 }
