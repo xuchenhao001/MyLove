@@ -21,7 +21,8 @@
     <script type="text/javascript" src="js/moment.min.js"></script>
     <script type="text/javascript" src="js/moment-precise-range.js"></script>
     <script type="text/javascript" src="js/garden.js"></script>
-    <script type="text/javascript" src="js/functions_dev.js?202304010001"></script>
+    <script type="text/javascript" src="js/functions_dev.js"></script>
+    <script type="text/javascript" src="js/periodic_table.js"></script>
 </head>
 
 <body>
@@ -48,6 +49,13 @@
                             <!-- <a class="btn btn-outline-dark border-0" href="pdf/WillYouMarryMe.pdf" aria-disabled="true"> <span class="h2"> Will you marry me? </span></a> -->
                             <!-- </div> -->
                         <!-- </div> -->
+                        <div class="row justify-content-center">
+                            <button id="achieve" type="button" class="btn btn-secondary btn-sm btn-warning" style="width: fit-content;">
+                                <div id="achieveHeader"></div>
+                                <div id="achieveBody"></div>
+                                <div id="achieveFooter"></div>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -93,6 +101,8 @@
     startDate.setMinutes(0);
     startDate.setSeconds(0);
     startDate.setMilliseconds(0);
+    var currentDate = new Date();
+    var dateDiff = moment.preciseDiff(startDate, currentDate, true);
 
     adjustWordsPosition(offsetX, offsetY, loveHeart.width());
     setTimeout(function () {
@@ -100,11 +110,13 @@
     }, 1000);
 
     setInterval(function () {
-        var currentDate = new Date();
-        var dateDiff = moment.preciseDiff(startDate, currentDate, true);
+        currentDate = new Date();
+        dateDiff = moment.preciseDiff(startDate, currentDate, true);
         timeElapseDate(dateDiff);
         timeElapseTime(dateDiff);
     }, 500);
+
+    processAchievement(dateDiff.years);
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

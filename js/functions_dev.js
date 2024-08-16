@@ -91,8 +91,9 @@ function showMessages(offsetX, offsetY, heartWidth) {
     $('#messages').fadeIn(1000);
     $('#elapseClockDate').fadeIn(1000);
     $('#elapseClockTime').fadeIn(1000);
-    $('#willYouMarryMe').fadeIn(0);
-    $('#willYouMarryMe').delay(1000).fadeTo(3000, 1);
+    // $('#willYouMarryMe').fadeIn(0);
+    // $('#willYouMarryMe').delay(1000).fadeTo(3000, 1);
+    $('#achieve').fadeIn(1000);
     $('#loveLetter').fadeIn(1000);
 }
 
@@ -107,3 +108,17 @@ function adjustWordsPosition(offsetX, offsetY, heartWidth) {
     // $words.css("top", "8rem");
 }
 
+function processAchievement(year_diff){
+    if (year_diff > 0) {
+        var elemt = periodic_table.elements[year_diff - 1];
+        // round mass to four decimals at most
+        var mass = Math.round(elemt.atomic_mass * 10000) / 10000;
+
+        headerDetail = elemt.number + " &nbsp " + mass;
+        bodyDetail = "<strong>" + elemt.symbol + "</strong>";
+        footerDetail = elemt.name;
+        $("#achieveHeader").html(headerDetail);
+        $("#achieveBody").html(bodyDetail);
+        $("#achieveFooter").html(footerDetail);
+    }
+}
