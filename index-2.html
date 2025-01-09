@@ -59,12 +59,36 @@
             color: #9E5E5E;
         }
 
-        .counter {
-            font-size: 1.5rem;
+        /* Counter Module */
+        .counter-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin: 1rem 0;
+        }
+
+        .counter-box {
+            background: rgba(158, 94, 94, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            margin: 0 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .counter-label {
+            font-size: 1.2rem;
             color: #9E5E5E;
         }
 
+        .counter-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #9E5E5E;
+            margin-top: 0.5rem;
+        }
+
+        /* Love Letter Module */
         .letter {
             background: #FFF8F7;
             padding: 2rem;
@@ -93,10 +117,10 @@
             color: #9E5E5E;
         }
 
-        /* New Timeline Styles */
+        /* Timeline Module */
         .timeline {
             position: relative;
-            max-width: 600px;
+            /* max-width: 600px; */
             margin: 2rem auto;
             padding: 20px;
         }
@@ -158,6 +182,38 @@
         .timeline-location {
             font-size: 1.1rem;
             color: #9E5E5E;
+            white-space: nowrap;
+        }
+
+        /* Parent Bank Module */
+        .parent-bank-module {
+            margin-top: 2rem;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 30px;
+            background-color: #9E5E5E;
+            width: 0%;
+        }
+
+        .progress-text {
+            margin-top: 0.5rem;
+            font-size: 1rem;
+            color: #9E5E5E;
         }
 
         /* Mobile Responsive Adjustments */
@@ -197,7 +253,33 @@
         <div class="date">Since August 14, 2023</div>
 
         <div class="module-container">
-            <div class="counter" id="counter"></div>
+            <h2 class="module-title">Time Since Our Wedding</h2>
+            <div class="counter-container">
+                <div class="counter-box">
+                    <div class="counter-label">Years</div>
+                    <div class="counter-value" id="years">0</div>
+                </div>
+                <div class="counter-box">
+                    <div class="counter-label">Months</div>
+                    <div class="counter-value" id="months">0</div>
+                </div>
+                <div class="counter-box">
+                    <div class="counter-label">Days</div>
+                    <div class="counter-value" id="days">0</div>
+                </div>
+                <div class="counter-box">
+                    <div class="counter-label">Hours</div>
+                    <div class="counter-value" id="hours">0</div>
+                </div>
+                <div class="counter-box">
+                    <div class="counter-label">Minutes</div>
+                    <div class="counter-value" id="minutes">0</div>
+                </div>
+                <div class="counter-box">
+                    <div class="counter-label">Seconds</div>
+                    <div class="counter-value" id="seconds">0</div>
+                </div>
+            </div>
         </div>
 
         <div class="module-container">
@@ -221,42 +303,55 @@
                 <div class="letter-signature">Forever Yours</div>
             </div>
         </div>
+
+        <div class="module-container">
+            <h2 class="module-title">Parent Bank Progress</h2>
+            <div class="parent-bank-module">
+                <div class="progress-info">
+                    <div class="target-amount">Target: AUD $240,000</div>
+                    <div class="current-progress">
+                        Should be saved: <span id="current-progress-amount">AUD $0</span>
+                    </div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <div class="progress-text" id="progress-text">0%</div>
+            </div>
+        </div>
     </div>
 
     <script>
         // Counter function
         function updateCounter() {
-            const marriageDate = moment('2023-08-14T00:00:00');
+            const marriageDate = moment.parseZone('2023-08-14T15:00:00+10:00');
             const now = moment();
+            // const duration = moment.duration(now.diff(marriageDate));
             const duration = moment.duration(now.diff(marriageDate));
-            
-            const years = Math.floor(duration.asYears());
-            const months = Math.floor(duration.asMonths()) % 12;
-            const days = Math.floor(duration.asDays()) % 30;
-            const hours = Math.floor(duration.asHours()) % 24;
-            const minutes = Math.floor(duration.asMinutes()) % 60;
-            const seconds = Math.floor(duration.asSeconds()) % 60;
+            // console.log(duration)
+            // console.log(now.diff(marriageDate, 'years'));
 
-            const counterText = `We have been married for:<br>
-                ${years} years, ${months} months, ${days} days<br>
-                ${hours} hours, ${minutes} minutes, and ${seconds} seconds`;
-            
-            document.getElementById('counter').innerHTML = counterText;
+            document.getElementById('years').innerText = duration.years();
+            document.getElementById('months').innerText = duration.months();
+            document.getElementById('days').innerText = duration.days();
+            document.getElementById('hours').innerText = duration.hours();
+            document.getElementById('minutes').innerText = duration.minutes();
+            document.getElementById('seconds').innerText = duration.seconds();
         }
 
         // Timeline data - Easy to update with new entries
         const timelineData = [
             {
                 date: 'August 14, 2023',
-                location: 'Our Wedding Day - Paris, France'
+                location: 'Melbourne, Australia'
             },
             {
                 date: 'December 25, 2023',
-                location: 'Christmas in Vienna, Austria'
+                location: 'Vienna, Austria'
             },
             {
                 date: 'January 1, 2024',
-                location: 'New Year in Prague, Czech Republic'
+                location: 'Prague, Czech Republic'
             }
         ];
 
@@ -278,10 +373,44 @@
             });
         }
 
+        // Parent Bank Module
+        function updateProgressBar() {
+            const startYear = 2025;
+            const startMonth = 0; // January (0-indexed)
+            const endYear = 2034;
+            const endMonth = 11; // December
+            const monthlySavings = 2000;
+            const totalTarget = 240000;
+
+            const now = moment();
+            const startMoment = moment([startYear, startMonth]);
+            const endMoment = moment([endYear, endMonth]);
+
+            let monthsPassed;
+            if (now.isBefore(startMoment)) {
+                monthsPassed = 0;
+            } else if (now.isAfter(endMoment)) {
+                monthsPassed = endMoment.diff(startMoment, 'months') + 1;
+            } else {
+                monthsPassed = now.diff(startMoment, 'months');
+            }
+        
+            const targetSaved = monthsPassed * monthlySavings;
+            const currentProgressAmount = Math.min(targetSaved, totalTarget); // Cap at total target
+            const percentage = (currentProgressAmount / totalTarget) * 100;
+
+            document.getElementById('current-progress-amount').innerText = `AUD $${currentProgressAmount.toLocaleString()}`;
+            document.getElementById('progress-bar').style.width = percentage + '%';
+            document.getElementById('progress-text').innerText = percentage.toFixed(2) + '%';
+        }
+
         // Initialize the page
         setInterval(updateCounter, 1000);
         updateCounter();
         createTimeline();
+        // Initialize the Parent Bank Module
+        updateProgressBar();
+        setInterval(updateProgressBar, 1000); 
     </script>
 </body>
 </html>
