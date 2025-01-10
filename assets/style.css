@@ -244,7 +244,7 @@ footer {
 }
 
 /* Mobile Responsive Adjustments */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
     :root {
         /* Adjust font sizes for mobile view */
         --small-font-size: 0.6rem;
