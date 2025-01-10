@@ -3,289 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Love Journey</title>
+    <title>Our Love Story</title>
+    <link rel="stylesheet" href="assets/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
-    <style>
-        @import url('https://fonts.cdnfonts.com/css/playfair-display');
-        @import url('https://fonts.cdnfonts.com/css/lora-4');
-        @import url('https://fonts.cdnfonts.com/css/great-vibes');
-
-        :root {
-            /* Define base font size here for easy adjustment */
-            --small-font-size: 0.8rem;
-            --normal-font-size: 1.0rem;
-            --large-font-size: 1.4rem;
-            --huge-font-size: 3.0rem;
-
-            /* Define colors for the romantic color scheme */
-            --primary-color: #9E5E5E;
-            --secondary-color: #617760;
-            --background-color: #FFF8F7;
-            --module-background-color: white;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Lora', sans-serif;
-            background-color: var(--background-color);
-            color: var(--primary-color);
-            line-height: 1.6;
-            padding: 20px;
-            font-size: var(--normal-font-size); 
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .header {
-            font-family: 'Playfair Display', sans-serif;
-            font-size: var(--huge-font-size);
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-            font-style: italic;
-        }
-
-        .date {
-            /* Use defined font size */
-            margin-bottom: 3rem;
-            color: var(--primary-color);
-        }
-
-        .module-container {
-            background-color: var(--module-background-color);
-            border: 2px solid rgba(158, 94, 94, 0.2);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .module-title {
-            font-family: 'Playfair Display', sans-serif;
-            font-size: var(--large-font-size);
-            margin-bottom: 1.5rem;
-            color: var(--primary-color);
-        }
-
-        /* Counter Module */
-        .counter-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap; /* Allow wrapping on smaller screens */
-        }
-
-        .counter-box {
-            background: var(--background-color);
-            padding: 0.5rem;
-            border-radius: 10px;
-            margin: 0.5rem; /* Reduced margin for smaller screens */
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            flex: 1 1 100px; /* Allow boxes to shrink and grow */
-            max-width: 100px; /* Limit maximum width */
-        }
-
-        .counter-label {
-            color: var(--primary-color);
-        }
-
-        .counter-value {
-            font-size: var(--large-font-size);
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-top: 0.5rem;
-        }
-
-        /* Timeline Module */
-        .timeline {
-            position: relative;
-            margin: auto;
-        }
-
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 2px;
-            background-color: var(--primary-color);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -1px;
-        }
-
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
-            text-align: right;
-        }
-
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            right: -13px;
-            top: 15px;
-            border-radius: 50%;
-            background-color: var(--background-color);
-            border: 3px solid var(--primary-color);
-            z-index: 1;
-        }
-
-        .timeline-item:nth-child(even) {
-            left: 50%;
-            text-align: left;
-        }
-
-        .timeline-item:nth-child(even)::after {
-            left: -13px;
-        }
-
-        .timeline-content {
-            padding: 15px;
-            background-color: var(--background-color);
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .timeline-date {
-            font-family: 'Playfair Display', sans-serif;
-            color: var(--secondary-color);
-            font-size: var(--small-font-size);
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-location {
-            font-size: var(--small-font-size);
-            color: var(--secondary-color);
-        }
-
-        .timeline-event {
-            color: var(--primary-color);
-            margin-top: 0.5rem;
-        }
-
-        /* Parent Bank Module */
-        .parent-bank-module {
-            background: var(--background-color);
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .parent-bank-progress-info {
-            display: flex;
-            justify-content: space-between; /* Evenly distribute items */
-            margin-bottom: 1rem;
-        }
-
-        .parent-bank-target-info,
-        .parent-bank-current-info {
-            flex-basis: 40%; /* Adjust this percentage as needed */
-        }
-
-        .parent-bank-label {
-            display: block; /* Place the label on its own line */
-        }
-
-        .parent-bank-value {
-            display: block; /* Place the value on its own line */
-            margin-top: 0.2rem; /* Add a small space between label and value */
-        }
-
-        .parent-bank-progress-bar-container {
-            width: 100%;
-            background-color: #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .parent-bank-progress-bar {
-            height: 30px;
-            background-color: var(--primary-color);
-            width: 0%;
-        }
-
-        .parent-bank-progress-text {
-            margin-top: 0.5rem;
-            color: var(--primary-color);
-        }
-
-        /* Love Letter Module */
-        .letter {
-            background: var(--background-color);
-            padding: 1rem;
-            border-radius: 10px;
-            text-align: center;
-            font-style: italic;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .letter-date {
-            font-size: var(--small-font-size);
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
-            /* display: none; */
-        }
-
-        .letter-content {
-            line-height: 1.8;
-        }
-
-        /* Mobile Responsive Adjustments */
-        @media screen and (max-width: 768px) {
-            :root {
-                /* Adjust font sizes for mobile view */
-                --small-font-size: 0.6rem;
-                --normal-font-size: 0.8rem;
-                --large-font-size: 1.2rem;
-                --huge-font-size: 2.0rem;
-            }
-
-            .counter-box {
-                flex: 1 1 30%; /* Each box takes up almost half the width */
-                max-width: none; /* Remove max-width on smaller screens */
-            }
-
-            .timeline::after {
-                left: 31px;
-            }
-
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-                text-align: left;
-            }
-
-            .timeline-item::after {
-                left: 18px;
-            }
-
-            .timeline-item:nth-child(even) {
-                left: 0;
-            }
-
-            .timeline-item:nth-child(even)::after {
-                left: 18px;
-            }
-
-        }
-    </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="header">Our Love Journey</h1>
+        <h1 class="header">Our Love Story</h1>
         <div class="date">Since August 14, 2023</div>
 
         <div class="module-container">
@@ -375,6 +99,14 @@
         </div>
     </div>
 
+    <footer>
+        <p>&copy;
+        <span id="copyright">
+            <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script>
+        </span>
+        Chenhao Xu. All rights reserved.</p>
+    </footer>
+
     <script>
         // Counter function
         function updateCounter() {
@@ -395,7 +127,7 @@
             const timeline = document.getElementById('timeline');
 
             // Fetch data from timelineData.json
-            const response = await fetch('./assets/timelineData.json');
+            const response = await fetch('assets/timelineData.json');
             const timelineData = await response.json();
 
             timelineData.forEach(item => {
