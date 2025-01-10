@@ -38,7 +38,7 @@
         }
 
         .date {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             margin-bottom: 3rem;
             color: #9E5E5E;
         }
@@ -54,7 +54,7 @@
 
         .module-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 1.5rem;
             margin-bottom: 1.5rem;
             color: #9E5E5E;
         }
@@ -65,15 +65,18 @@
             justify-content: center;
             align-items: center;
             margin: 1rem 0;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
         }
 
         .counter-box {
             background: rgba(158, 94, 94, 0.1);
-            padding: 1rem 2rem;
+            padding: 0.5rem;
             border-radius: 10px;
-            margin: 0 1rem;
+            margin: 0.5rem; /* Reduced margin for smaller screens */
             text-align: center;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex: 1 1 100px; /* Allow boxes to shrink and grow */
+            max-width: 100px; /* Limit maximum width */
         }
 
         .counter-label {
@@ -82,7 +85,7 @@
         }
 
         .counter-value {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: #9E5E5E;
             margin-top: 0.5rem;
@@ -105,7 +108,7 @@
         }
 
         .letter-content {
-            font-size: 1.1rem;
+            font-size: 1.0rem;
             line-height: 1.8;
             margin-bottom: 1rem;
         }
@@ -113,7 +116,7 @@
         .letter-signature {
             text-align: right;
             font-style: normal;
-            font-size: 1.1rem;
+            font-size: 1.0rem;
             color: #9E5E5E;
         }
 
@@ -244,6 +247,11 @@
             .timeline-item:nth-child(even)::after {
                 left: 21px;
             }
+
+            .counter-box {
+                flex: 1 1 30%; /* Each box takes up almost half the width */
+                max-width: none; /* Remove max-width on smaller screens */
+            }
         }
     </style>
 </head>
@@ -305,7 +313,7 @@
         </div>
 
         <div class="module-container">
-            <h2 class="module-title">Parent Bank Progress</h2>
+            <h2 class="module-title">Parent Bank Repayment Progress</h2>
             <div class="parent-bank-module">
                 <div class="progress-info">
                     <div class="target-amount">Target: AUD $240,000</div>
