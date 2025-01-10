@@ -1,68 +1,335 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Our Love Story</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <style type="text/css">
-        @font-face {
-            font-family: Digital;
-            src: url('fonts/Digital-Mono.ttf') format("truetype");
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Journey</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/playfair-display');
+        @import url('https://fonts.cdnfonts.com/css/lora-4');
+        @import url('https://fonts.cdnfonts.com/css/great-vibes');
+
+        :root {
+            /* Define base font size here for easy adjustment */
+            --small-font-size: 0.8rem;
+            --normal-font-size: 1.0rem;
+            --large-font-size: 1.4rem;
+            --huge-font-size: 3.0rem;
+
+            /* Define colors for the romantic color scheme */
+            --primary-color: #9E5E5E;
+            --secondary-color: #617760;
+            --background-color: #FFF8F7;
+            --module-background-color: white;
         }
-        @font-face {
-            font-family: GreatVibesRegular;
-            src: url('fonts/GreatVibes-Regular.ttf') format("truetype");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', sans-serif;
+            background-color: var(--background-color);
+            color: var(--primary-color);
+            line-height: 1.6;
+            padding: 20px;
+            font-size: var(--normal-font-size); 
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .header {
+            font-family: 'Playfair Display', sans-serif;
+            font-size: var(--huge-font-size);
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            font-style: italic;
+        }
+
+        .date {
+            /* Use defined font size */
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .module-container {
+            background-color: var(--module-background-color);
+            border: 2px solid rgba(158, 94, 94, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .module-title {
+            font-family: 'Playfair Display', sans-serif;
+            font-size: var(--large-font-size);
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Counter Module */
+        .counter-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        .counter-box {
+            background: var(--background-color);
+            padding: 0.5rem;
+            border-radius: 10px;
+            margin: 0.5rem; /* Reduced margin for smaller screens */
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex: 1 1 100px; /* Allow boxes to shrink and grow */
+            max-width: 100px; /* Limit maximum width */
+        }
+
+        .counter-label {
+            color: var(--primary-color);
+        }
+
+        .counter-value {
+            font-size: var(--large-font-size);
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-top: 0.5rem;
+        }
+
+        /* Timeline Module */
+        .timeline {
+            position: relative;
+            margin: auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            text-align: right;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -13px;
+            top: 15px;
+            border-radius: 50%;
+            background-color: var(--background-color);
+            border: 3px solid var(--primary-color);
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            text-align: left;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -13px;
+        }
+
+        .timeline-content {
+            padding: 15px;
+            background-color: var(--background-color);
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-date {
+            font-family: 'Playfair Display', sans-serif;
+            color: var(--secondary-color);
+            font-size: var(--small-font-size);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-location {
+            font-size: var(--small-font-size);
+            color: var(--secondary-color);
+        }
+
+        .timeline-event {
+            color: var(--primary-color);
+            margin-top: 0.5rem;
+        }
+
+        /* Parent Bank Module */
+        .parent-bank-module {
+            background: var(--background-color);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .parent-bank-progress-info {
+            display: flex;
+            justify-content: space-between; /* Evenly distribute items */
+            margin-bottom: 1rem;
+        }
+
+        .parent-bank-target-info,
+        .parent-bank-current-info {
+            flex-basis: 40%; /* Adjust this percentage as needed */
+        }
+
+        .parent-bank-label {
+            display: block; /* Place the label on its own line */
+        }
+
+        .parent-bank-value {
+            display: block; /* Place the value on its own line */
+            margin-top: 0.2rem; /* Add a small space between label and value */
+        }
+
+        .parent-bank-progress-bar-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .parent-bank-progress-bar {
+            height: 30px;
+            background-color: var(--primary-color);
+            width: 0%;
+        }
+
+        .parent-bank-progress-text {
+            margin-top: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Love Letter Module */
+        .letter {
+            background: var(--background-color);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            font-style: italic;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .letter-date {
+            font-size: var(--small-font-size);
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            /* display: none; */
+        }
+
+        .letter-content {
+            line-height: 1.8;
+        }
+
+        /* Mobile Responsive Adjustments */
+        @media screen and (max-width: 768px) {
+            :root {
+                /* Adjust font sizes for mobile view */
+                --small-font-size: 0.6rem;
+                --normal-font-size: 0.8rem;
+                --large-font-size: 1.2rem;
+                --huge-font-size: 2.0rem;
+            }
+
+            .counter-box {
+                flex: 1 1 30%; /* Each box takes up almost half the width */
+                max-width: none; /* Remove max-width on smaller screens */
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+                text-align: left;
+            }
+
+            .timeline-item::after {
+                left: 18px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item:nth-child(even)::after {
+                left: 18px;
+            }
+
         }
     </style>
-    <link href="css/default_dev.css" type="text/css" rel="stylesheet">
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/moment.min.js"></script>
-    <script type="text/javascript" src="js/moment-precise-range.js"></script>
-    <script type="text/javascript" src="js/garden.js"></script>
-    <script type="text/javascript" src="js/functions_dev.js"></script>
-    <script type="text/javascript" src="js/periodic_table.js"></script>
 </head>
-
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="container min-vh-100" id="loveHeart">
-                <div class="container">
-                    <canvas id="garden"></canvas>
+    <div class="container">
+        <h1 class="header">Our Love Journey</h1>
+        <div class="date">Since August 14, 2023</div>
+
+        <div class="module-container">
+            <h2 class="module-title">Time Since Our Wedding</h2>
+            <div class="counter-container">
+                <div class="counter-box">
+                    <div class="counter-label">Years</div>
+                    <div class="counter-value" id="years">0</div>
                 </div>
-                <div class="container" id="words">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-10 offset-1 h2" id="messages">We have been married for</div>
-                        </div>
-                        <div class="row">
-                            <div class="col text-center h3 elapseClock" id="elapseClockDate"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col text-center h3 elapseClock" id="elapseClockTime"></div>
-                        </div>
-                        <!-- <div class="row"> -->
-                            <!-- <div class="col-12 text-center" id="willYouMarryMe"> -->
-                            <!-- <a class="btn btn-outline-dark border-0" href="pdf/WillYouMarryMe.pdf" aria-disabled="true"> <span class="h2"> Will you marry me? </span></a> -->
-                            <!-- </div> -->
-                        <!-- </div> -->
-                        <div class="row justify-content-center">
-                            <button id="achieve" type="button" class="btn btn-secondary btn-sm btn-warning" style="width: fit-content;">
-                                <div id="achieveHeader"></div>
-                                <div id="achieveBody"></div>
-                                <div id="achieveFooter"></div>
-                            </button>
-                        </div>
-                    </div>
+                <div class="counter-box">
+                    <div class="counter-label">Months</div>
+                    <div class="counter-value" id="months">0</div>
+                </div>
+                <div class="counter-box">
+                    <div class="counter-label">Days</div>
+                    <div class="counter-value" id="days">0</div>
+                </div>
+                <div class="counter-box">
+                    <div class="counter-label">Hours</div>
+                    <div class="counter-value" id="hours">0</div>
+                </div>
+                <div class="counter-box">
+                    <div class="counter-label">Minutes</div>
+                    <div class="counter-value" id="minutes">0</div>
+                </div>
+                <div class="counter-box">
+                    <div class="counter-label">Seconds</div>
+                    <div class="counter-value" id="seconds">0</div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
-            <div class="container min-vh-100 text-center d-flex justify-content-center">
-                <div class="row align-self-center h4" id="loveLetter">
+
+        <div class="module-container">
+            <h2 class="module-title">Our Adventures Together</h2>
+            <div class="timeline" id="timeline">
+                <!-- Timeline items will be dynamically added here -->
+            </div>
+        </div>
+
+        <div class="module-container">
+            <h2 class="module-title">Love Letter</h2>
+            <div class="letter">
+                <div class="letter-date">March 22, 2022</div>
+                <div class="letter-content">
                     <p>
                     This one is for my one and only true love<br/>
                     Princess Chula<br/>
@@ -86,38 +353,102 @@
                 </div>
             </div>
         </div>
+
+        <div class="module-container">
+            <h2 class="module-title">Parent Bank Repayment Progress</h2>
+            <div class="parent-bank-module">
+                <div class="parent-bank-progress-info">
+                    <div class="parent-bank-target-info">
+                        <div class="parent-bank-label">Target:</div>
+                        <div class="parent-bank-value" id="target-amount">AUD $240,000</div>
+                    </div>
+                    <div class="parent-bank-current-info">
+                        <div class="parent-bank-label">Saved:</div>
+                        <div class="parent-bank-value" id="parent-bank-current-amount">AUD $0</div>
+                    </div>
+                </div>
+                <div class="parent-bank-progress-bar-container">
+                    <div class="parent-bank-progress-bar" id="parent-bank-progress-bar"></div>
+                </div>
+                <div class="parent-bank-progress-text" id="parent-bank-progress-text">0%</div>
+            </div>
+        </div>
     </div>
-    <footer class="mb-2 text-muted text-center text-small">
-        <p> Copyright &copy; 2025 Chenhao Xu</p>
-    </footer>
-</div>
-<script type="text/javascript">
-    var loveHeart = $("#loveHeart");
-    var offsetX = loveHeart.width() / 2;
-    var offsetY = loveHeart.height() / 2 - 0.05 * loveHeart.height();
-    var startDate = new Date();
-    startDate.setFullYear(2023, 7, 14); // month range: 0~11
-    startDate.setHours(15);
-    startDate.setMinutes(0);
-    startDate.setSeconds(0);
-    startDate.setMilliseconds(0);
-    var currentDate = new Date();
-    var dateDiff = moment.preciseDiff(startDate, currentDate, true);
 
-    adjustWordsPosition(offsetX, offsetY, loveHeart.width());
-    setTimeout(function () {
-        startHeartAnimation(offsetX, offsetY, loveHeart.width());
-    }, 1000);
+    <script>
+        // Counter function
+        function updateCounter() {
+            const marriageDate = moment.parseZone('2023-08-14T15:00:00+10:00');
+            const now = moment();
+            const duration = moment.duration(now.diff(marriageDate));
 
-    setInterval(function () {
-        currentDate = new Date();
-        dateDiff = moment.preciseDiff(startDate, currentDate, true);
-        timeElapseDate(dateDiff);
-        timeElapseTime(dateDiff);
-    }, 500);
+            document.getElementById('years').innerText = duration.years();
+            document.getElementById('months').innerText = duration.months();
+            document.getElementById('days').innerText = duration.days();
+            document.getElementById('hours').innerText = duration.hours();
+            document.getElementById('minutes').innerText = duration.minutes();
+            document.getElementById('seconds').innerText = duration.seconds();
+        }
 
-    processAchievement(dateDiff.years);
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        // Function to create timeline items
+        async function createTimeline() {
+            const timeline = document.getElementById('timeline');
+
+            // Fetch data from timelineData.json
+            const response = await fetch('./assets/timelineData.json');
+            const timelineData = await response.json();
+
+            timelineData.forEach(item => {
+                const timelineItem = document.createElement('div');
+                timelineItem.className = 'timeline-item';
+                
+                timelineItem.innerHTML = `
+                    <div class="timeline-content">
+                        <div class="timeline-date">${item.date}</div>
+                        <div class="timeline-location">${item.location}</div>
+                        <div class="timeline-event">${item.event}</div>
+                    </div>
+                `;
+                
+                timeline.appendChild(timelineItem);
+            });
+        }
+
+        // Parent Bank Module
+        function updateProgressBar() {
+            const monthlySavings = 2000;
+            const totalTarget = 240000;
+
+            const startMoment = moment.parseZone('2025-01-01T00:00:00+10:00');
+            const endMoment = moment.parseZone('2034-12-31T23:59:59+10:00');
+            // const now = moment.parseZone('2034-12-31T23:59:59+10:00');
+            const now = moment();
+
+            let monthsPassed;
+            if (now.isBefore(startMoment)) {
+                monthsPassed = 0;
+            } else if (now.isAfter(endMoment)) {
+                monthsPassed = endMoment.diff(startMoment, 'months') + 1;
+            } else {
+                monthsPassed = now.diff(startMoment, 'months');
+            }
+        
+            const targetSaved = monthsPassed * monthlySavings;
+            const currentProgressAmount = Math.min(targetSaved, totalTarget); // Cap at total target
+            const percentage = (currentProgressAmount / totalTarget) * 100;
+
+            document.getElementById('parent-bank-current-amount').innerText = `AUD $${currentProgressAmount.toLocaleString()}`;
+            document.getElementById('parent-bank-progress-bar').style.width = percentage + '%';
+            document.getElementById('parent-bank-progress-text').innerText = percentage.toFixed(2) + '%';
+        }
+
+        // Initialize the page
+        setInterval(updateCounter, 1000);
+        updateCounter();
+        createTimeline();
+        // Initialize the Parent Bank Module
+        updateProgressBar();
+        setInterval(updateProgressBar, 1000); 
+    </script>
 </body>
 </html>
