@@ -2,7 +2,22 @@
 
 This is a project for my love. Demo: [https://deer.dedog.top](https://deer.dedog.top/).
 
-## Install
+## Prerequisite
 
-* Clone this repo
-* Move this project to your HTTP server
+- Python 3.10
+
+```bash
+$ pip install Flask
+```
+
+## Run
+
+- Clone this repository
+- Start Python HTTP server
+
+```bash
+$ cd MyLove/
+$ python app.py
+```
+
+Now, your entire website is running on http://0.0.0.0:3414.

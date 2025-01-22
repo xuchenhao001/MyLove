@@ -167,6 +167,27 @@ body {
     margin-top: 0.5rem;
 }
 
+/* Love Letter Module */
+.letter {
+    background: var(--background-color);
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    font-style: italic;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.letter-date {
+    font-size: var(--small-font-size);
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    /* display: none; */
+}
+
+.letter-content {
+    line-height: 1.8;
+}
+
 /* Parent Bank Module */
 .parent-bank-module {
     background: var(--background-color);
@@ -213,25 +234,72 @@ body {
     color: var(--primary-color);
 }
 
-/* Love Letter Module */
-.letter {
-    background: var(--background-color);
-    padding: 1rem;
-    border-radius: 10px;
+/* Workday Module */
+.workday-calendar-container {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.workday-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.workday-time-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    /* Add space between form and buttons */
+    width: 300px;
+    /* Adjust width as needed */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.workday-time-form label {
+    text-align: left;
+    /* Align labels to the left */
+}
+
+.workday-input-container input[type="time"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
     text-align: center;
-    font-style: italic;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.letter-date {
-    font-size: var(--small-font-size);
-    color: var(--secondary-color);
-    margin-bottom: 1rem;
-    /* display: none; */
+.workday-button-container {
+    display: flex;
+    justify-content: center;
+    /* Center buttons horizontally */
 }
 
-.letter-content {
-    line-height: 1.8;
+#workday-save-button,
+#workday-reset-button {
+    background-color: var(--primary-color);
+    /* Example color */
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 5px;
+    /* Add space between buttons */
+}
+
+.workday-summary-container {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.worked-day {
+    background-color: var(--secondary-color);
+    /* Or any color you like */
+    color: white;
 }
 
 /* Copyright */
@@ -285,4 +353,8 @@ footer {
         left: 18px;
     }
 
+    .workday-time-form {
+        width: 90%;
+        /* Adjust width for smaller screens */
+    }
 }

@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Love Story</title>
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/calendar.css">
+    <link rel="stylesheet" href="/assets/style.css">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script type="text/javascript" src="/assets/script.js"></script>
 </head>
 <body>
     <div class="container">
@@ -97,6 +102,40 @@
                 <div class="parent-bank-progress-text" id="parent-bank-progress-text">0%</div>
             </div>
         </div>
+
+        <div class="module-container">
+            <h2 class="module-title">Workday</h2>
+
+            <div class="workday-calendar-container">
+                <div id="workday-calendar"></div>
+            </div>
+        
+            <div class="workday-input-container">
+                <div class="workday-time-form">
+                    <label for="workday-start-time">Start Time:</label>
+                    <input type="time" id="workday-start-time" value="08:00">
+            
+                    <label for="workday-lunch-start">Lunch Break Start:</label>
+                    <input type="time" id="workday-lunch-start" value="13:00">
+            
+                    <label for="workday-lunch-end">Lunch Break End:</label>
+                    <input type="time" id="workday-lunch-end" value="14:00">
+            
+                    <label for="workday-end-time">End Time:</label>
+                    <input type="time" id="workday-end-time" value="18:00">
+                </div>
+            
+                <div class="workday-button-container">
+                    <button id="workday-save-button">Save</button>
+                    <button id="workday-reset-button">Reset</button>
+                </div>
+            </div>
+        
+            <div class="workday-summary-container">
+                <h3>This Week's Working Hours:</h3>
+                <p id="workday-weekly-hours">0</p>
+            </div>
+        </div>
     </div>
 
     <footer>
@@ -108,79 +147,15 @@
     </footer>
 
     <script>
-        // Counter function
-        function updateCounter() {
-            const marriageDate = moment.parseZone('2023-08-14T15:00:00+10:00');
-            const now = moment();
-            const duration = moment.duration(now.diff(marriageDate));
-
-            document.getElementById('years').innerText = duration.years();
-            document.getElementById('months').innerText = duration.months();
-            document.getElementById('days').innerText = duration.days();
-            document.getElementById('hours').innerText = duration.hours();
-            document.getElementById('minutes').innerText = duration.minutes();
-            document.getElementById('seconds').innerText = duration.seconds();
-        }
-
-        // Function to create timeline items
-        async function createTimeline() {
-            const timeline = document.getElementById('timeline');
-
-            // Fetch data from timelineData.json
-            const response = await fetch('assets/timelineData.json');
-            const timelineData = await response.json();
-
-            timelineData.forEach(item => {
-                const timelineItem = document.createElement('div');
-                timelineItem.className = 'timeline-item';
-                
-                timelineItem.innerHTML = `
-                    <div class="timeline-content">
-                        <div class="timeline-date">${item.date}</div>
-                        <div class="timeline-location">${item.location}</div>
-                        <div class="timeline-event">${item.event}</div>
-                    </div>
-                `;
-                
-                timeline.appendChild(timelineItem);
-            });
-        }
-
-        // Parent Bank Module
-        function updateProgressBar() {
-            const monthlySavings = 2000;
-            const totalTarget = 240000;
-
-            const startMoment = moment.parseZone('2025-01-01T00:00:00+10:00');
-            const endMoment = moment.parseZone('2034-12-31T23:59:59+10:00');
-            // const now = moment.parseZone('2034-12-31T23:59:59+10:00');
-            const now = moment();
-
-            let monthsPassed;
-            if (now.isBefore(startMoment)) {
-                monthsPassed = 0;
-            } else if (now.isAfter(endMoment)) {
-                monthsPassed = endMoment.diff(startMoment, 'months') + 1;
-            } else {
-                monthsPassed = now.diff(startMoment, 'months');
-            }
-        
-            const targetSaved = monthsPassed * monthlySavings;
-            const currentProgressAmount = Math.min(targetSaved, totalTarget); // Cap at total target
-            const percentage = (currentProgressAmount / totalTarget) * 100;
-
-            document.getElementById('parent-bank-current-amount').innerText = `AUD $${currentProgressAmount.toLocaleString()}`;
-            document.getElementById('parent-bank-progress-bar').style.width = percentage + '%';
-            document.getElementById('parent-bank-progress-text').innerText = percentage.toFixed(2) + '%';
-        }
-
         // Initialize the page
         setInterval(updateCounter, 1000);
         updateCounter();
         createTimeline();
-        // Initialize the Parent Bank Module
+        // Initialize the Parent Bank module
         updateProgressBar();
         setInterval(updateProgressBar, 1000); 
+        // Initialize the Workday module
+        initializeWorkdayModule();
     </script>
 </body>
 </html>
