@@ -20,7 +20,7 @@ $ cd MyLove/
 $ python app.py
 ```
 
-Now, your entire website is running on http://0.0.0.0:3414.
+Now, your entire website is running on http://127.0.0.1:3414.
 
 ## Run in daemon
 
