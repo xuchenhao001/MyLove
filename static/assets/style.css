@@ -241,6 +241,17 @@ body {
     justify-content: center;
 }
 
+/* General Input Resets for iOS Compatibility */
+input {
+    -webkit-appearance: none;
+    /* Remove default iOS styling */
+    -moz-appearance: none;
+    /* Remove default Firefox styling */
+    appearance: none;
+    border-radius: 0;
+    /* Reset border radius */
+}
+
 .workday-input-container {
     display: flex;
     flex-direction: column;
@@ -261,6 +272,34 @@ body {
 .workday-time-form label {
     text-align: left;
     /* Align labels to the left */
+}
+
+.workday-time-form input[type="time"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    /* height: 35px; */
+    margin-bottom: 0.5rem;
+    font-size: var(--normal-font-size);
+    /* Ensure consistent font size */
+    line-height: 1.5;
+    background-color: transparent;
+    color: var(--primary-color);
+}
+
+/* Remove extra spin buttons on some browsers */
+.workday-time-form input[type="time"]::-webkit-inner-spin-button,
+.workday-time-form input[type="time"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Style the placeholder text (optional) */
+.workday-time-form input[type="time"]::placeholder {
+    color: var(--primary-color);
+    opacity: 0.6;
+    /* Adjust as needed */
 }
 
 .workday-input-container input[type="time"] {
