@@ -21,3 +21,22 @@ $ python app.py
 ```
 
 Now, your entire website is running on http://0.0.0.0:3414.
+
+## Run in daemon
+
+To use the Systemd service, place a unit file to `/etc/systemd/system/mylove.service`
+
+```bash
+[Unit]
+Description=MyLove HTTP Service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/MyLove
+ExecStart=python3 /home/ubuntu/MyLove/app.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
