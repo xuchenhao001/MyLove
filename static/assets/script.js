@@ -107,7 +107,8 @@ async function saveWorkdayData(workdayData) {
 
 // 3. Calculate Weekly Hours
 function calculateWeeklyHours(workdayData, selectedDate) {
-    const calculateDate = moment(selectedDate).startOf('isoWeek');
+    // const calculateDate = moment(selectedDate).startOf('isoWeek');
+    const calculateDate = moment(selectedDate).day(moment(selectedDate).day() >= 3 ? 3 : -4); // start from last Wednesday
     let totalSeconds = 0;
 
     for (let i = 0; i < 7; i++, calculateDate.add(1, 'day')) {
@@ -156,8 +157,9 @@ function updateInputFields(workdayData, selectedDate) {
     document.getElementById('workday-lunch-end').value = entry ? entry.lunchEnd : '14:00';
 
     // Convert selectedDate string to moment object for getDay()
-    const selectedMoment = moment(selectedDate);
-    const endTime = selectedMoment.day() === 5 ? '17:00' : '18:00'; // 5 represents Friday
+    // const selectedMoment = moment(selectedDate);
+    // const endTime = selectedMoment.day() === 5 ? '17:00' : '18:00'; // 5 represents Friday
+    const endTime = '17:00'
     document.getElementById('workday-end-time').value = entry ? entry.endTime : endTime; // 5 represents Friday
 
     // Update weekly hours display whenever a date is selected
