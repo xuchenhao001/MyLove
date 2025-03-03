@@ -1,9 +1,9 @@
 // --- Counter Module ---
 
 function updateCounter() {
-    const marriageDate = moment.parseZone('2023-08-14T15:00:00+10:00');
-    const now = moment();
-    const duration = moment.duration(now.diff(marriageDate));
+    const marriageDate = dayjs('2023-08-14T15:00:00+10:00');
+    const now = dayjs();
+    const duration = dayjs.duration(now.diff(marriageDate))
 
     document.getElementById('years').innerText = duration.years();
     document.getElementById('months').innerText = duration.months();
@@ -44,18 +44,18 @@ function updateProgressBar() {
     const monthlySavings = 2000;
     const totalTarget = 240000;
 
-    const startMoment = moment.parseZone('2025-01-01T00:00:00+10:00');
-    const endMoment = moment.parseZone('2034-12-31T23:59:59+10:00');
-    // const now = moment.parseZone('2034-12-31T23:59:59+10:00');
-    const now = moment();
+    const startTime = dayjs('2025-01-01T00:00:00+10:00');
+    const endTime = dayjs('2034-12-31T23:59:59+10:00');
+    // const now = dayjs('2034-12-31T23:59:59+10:00');
+    const now = dayjs();
 
     let monthsPassed;
-    if (now.isBefore(startMoment)) {
+    if (now.isBefore(startTime)) {
         monthsPassed = 0;
-    } else if (now.isAfter(endMoment)) {
-        monthsPassed = endMoment.diff(startMoment, 'months') + 1;
+    } else if (now.isAfter(endTime)) {
+        monthsPassed = endTime.diff(startTime, 'months') + 1;
     } else {
-        monthsPassed = now.diff(startMoment, 'months');
+        monthsPassed = now.diff(startTime, 'months');
     }
 
     const targetSaved = monthsPassed * monthlySavings;
@@ -107,37 +107,44 @@ async function saveWorkdayData(workdayData) {
 
 // 3. Calculate Weekly Hours
 function calculateWeeklyHours(workdayData, selectedDate) {
-    // const calculateDate = moment(selectedDate).startOf('isoWeek');
-    const calculateDate = moment(selectedDate).day(moment(selectedDate).day() >= 3 ? 3 : -4); // start from last Wednesday
+
+    let weekStartDate;
+    if (dayjs(selectedDate).day() >= 3) {
+        weekStartDate = dayjs(selectedDate).startOf('week').add(3, 'day');
+    } else {
+        weekStartDate = dayjs(selectedDate).startOf('week').subtract(4, 'day');
+    }
+
+    let calculateDate = weekStartDate;
     let totalSeconds = 0;
 
-    for (let i = 0; i < 7; i++, calculateDate.add(1, 'day')) {
-        const date = calculateDate.format('YYYY-MM-DD');
-        if (workdayData[date]) {
-            const entry = workdayData[date];
-            const start = moment(date + 'T' + entry.startTime);
-            const lunchStart = moment(date + 'T' + entry.lunchStart);
-            const lunchEnd = moment(date + 'T' + entry.lunchEnd);
-            const end = moment(date + 'T' + entry.endTime);
+    for (let i = 0; i < 7; i++, calculateDate = calculateDate.add(1, 'day')) {
+        const dateStr = calculateDate.format('YYYY-MM-DD');
+        if (workdayData[dateStr]) {
+            const entry = workdayData[dateStr];
+            const start = dayjs(dateStr + 'T' + entry.startTime);
+            const lunchStart = dayjs(dateStr + 'T' + entry.lunchStart);
+            const lunchEnd = dayjs(dateStr + 'T' + entry.lunchEnd);
+            const end = dayjs(dateStr + 'T' + entry.endTime);
 
             // Check if the input timesheet is valid
             if (!start.isValid() || !lunchStart.isValid() || !lunchEnd.isValid() || !end.isValid()) {
                 continue;
             }
-            if (moment.duration(lunchStart.diff(start)) < 0) {
+            if (dayjs.duration(lunchStart.diff(start)) < 0) {
                 continue;
             }
-            if (moment.duration(lunchEnd.diff(lunchStart)) < 0) {
+            if (dayjs.duration(lunchEnd.diff(lunchStart)) < 0) {
                 continue;
             }
-            if (moment.duration(end.diff(lunchEnd)) < 0) {
+            if (dayjs.duration(end.diff(lunchEnd)) < 0) {
                 continue;
             }
 
             // If everything is ok, accumulate the working hours
-            const workDuration = moment.duration(end.diff(start));
-            const lunchDuration = moment.duration(lunchEnd.diff(lunchStart));
-            totalSeconds += workDuration.subtract(lunchDuration).asSeconds();
+            const workDuration = dayjs.duration(end.diff(start));
+            const lunchDuration = dayjs.duration(lunchEnd.diff(lunchStart));
+            totalSeconds += workDuration.subtract(lunchDuration).as('seconds');
         }
     }
 
@@ -156,11 +163,8 @@ function updateInputFields(workdayData, selectedDate) {
     document.getElementById('workday-lunch-start').value = entry ? entry.lunchStart : '13:00';
     document.getElementById('workday-lunch-end').value = entry ? entry.lunchEnd : '14:00';
 
-    // Convert selectedDate string to moment object for getDay()
-    // const selectedMoment = moment(selectedDate);
-    // const endTime = selectedMoment.day() === 5 ? '17:00' : '18:00'; // 5 represents Friday
     const endTime = '17:00'
-    document.getElementById('workday-end-time').value = entry ? entry.endTime : endTime; // 5 represents Friday
+    document.getElementById('workday-end-time').value = entry ? entry.endTime : endTime;
 
     // Update weekly hours display whenever a date is selected
     updateWeeklyHoursDisplay(workdayData, selectedDate);
@@ -175,7 +179,7 @@ function updateWeeklyHoursDisplay(workdayData, selectedDate) {
 // 6. Event Listeners and Initialization
 async function initializeWorkdayModule() {
     let workdayData = await loadWorkdayData(); // Load data first
-    let selectedDate = moment().format('YYYY-MM-DD'); // Initially selected date (today)
+    let selectedDate = dayjs().format('YYYY-MM-DD'); // Initially selected date (today)
 
     // Initialize Flatpickr
     const workdayCalendar = flatpickr("#workday-calendar", {
@@ -192,7 +196,7 @@ async function initializeWorkdayModule() {
         },
         onDayCreate: function (dObj, dStr, fp, dayElem) {
             // Highlight days with work entries
-            const dateStr = moment(dayElem.dateObj).format('YYYY-MM-DD');
+            const dateStr = dayjs(dayElem.dateObj).format('YYYY-MM-DD');
             if (workdayData[dateStr]) {
                 dayElem.classList.add('worked-day');
             }
